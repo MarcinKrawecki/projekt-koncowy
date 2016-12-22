@@ -38,4 +38,70 @@ class User extends BaseUser
     */
     private $category;
 
+
+    /**
+     * Add task
+     *
+     * @param \TaskPlannerBundle\Entity\Task $task
+     * @return User
+     */
+    public function addTask(\TaskPlannerBundle\Entity\Task $task)
+    {
+        $this->task[] = $task;
+
+        return $this;
+    }
+
+    /**
+     * Remove task
+     *
+     * @param \TaskPlannerBundle\Entity\Task $task
+     */
+    public function removeTask(\TaskPlannerBundle\Entity\Task $task)
+    {
+        $this->task->removeElement($task);
+    }
+
+    /**
+     * Get task
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getTask()
+    {
+        return $this->task;
+    }
+
+    /**
+     * Add category
+     *
+     * @param \TaskPlannerBundle\Entity\Category $category
+     * @return User
+     */
+    public function addCategory(\TaskPlannerBundle\Entity\Category $category)
+    {
+        $this->category[] = $category;
+
+        return $this;
+    }
+
+    /**
+     * Remove category
+     *
+     * @param \TaskPlannerBundle\Entity\Category $category
+     */
+    public function removeCategory(\TaskPlannerBundle\Entity\Category $category)
+    {
+        $this->category->removeElement($category);
+    }
+
+    /**
+     * Get category
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getCategory()
+    {
+        return $this->category;
+    }
 }
