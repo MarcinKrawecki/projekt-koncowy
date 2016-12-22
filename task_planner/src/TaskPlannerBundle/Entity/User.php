@@ -27,14 +27,15 @@ class User extends BaseUser
     {
         parent::__construct();
     }
-/*
+
     /**
      * @ORM\OneToMany(targetEntity="Task", mappedBy="User")
      */
-   // private $task;
-   // /**
-    // * @ORM\OneToMany(targetEntity="Category", mappedBy="User")
-    // */
-   // private $category;*/
+    private $task;
+
+    /**
+    * @ORM\OneToMany(targetEntity="Category", mappedBy="User")
+    */
+    private $category;
 
 }
