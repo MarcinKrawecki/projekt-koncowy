@@ -7,28 +7,33 @@
         <thead>
             <tr>
                 <th>Id</th>
+                <th>User</th>
                 <th>Name</th>
                 <th>Description</th>
+                <th>Category</th>
                 <th>Done</th>
                 <th>Duedate</th>
                 <th>Actions</th>
             </tr>
         </thead>
         <tbody>
+
         {% for task in tasks %}
-            <tr>
+                   <tr>
                 <td><a href="{{ path('task_show', { 'id': task.id }) }}">{{ task.id }}</a></td>
+                <td>{{ task.user}}</td>
                 <td>{{ task.name }}</td>
                 <td>{{ task.description }}</td>
+                <td>{{ task.category }}</td>
                 <td>{% if task.done %}Yes{% else %}No{% endif %}</td>
                 <td>{% if task.dueDate %}{{ task.dueDate|date('Y-m-d') }}{% endif %}</td>
                 <td>
                     <ul>
                         <li>
-                            <a href="{{ path('task_show', { 'id': task.id }) }}">show</a>
+                            <a href="{{ path('task_show', { 'id': task.id }) }}">show Task</a>
                         </li>
                         <li>
-                            <a href="{{ path('task_edit', { 'id': task.id }) }}">edit</a>
+                            <a href="{{ path('task_edit', { 'id': task.id }) }}">edit Task</a>
                         </li>
                     </ul>
                 </td>
@@ -41,5 +46,6 @@
         <li>
             <a href="{{ path('task_new') }}">Create a new task</a>
         </li>
+
     </ul>
 {% endblock %}

@@ -19,7 +19,8 @@
             </tr>
             <tr>
                 <th>Done</th>
-                <td>{% if task.done %}Yes{% else %}No{% endif %}</td>
+                <td>{% if task.done %}Yes</td><br>
+                 <td>   {% else %}No{% endif %}</td>
             </tr>
             <tr>
                 <th>Duedate</th>
@@ -30,14 +31,14 @@
 
     <ul>
         <li>
-            <a href="{{ path('task_index') }}">Back to the list</a>
+            <a href="{{ path('task_index') }}">Back to the Task list</a>
         </li>
         <li>
-            <a href="{{ path('task_edit', { 'id': task.id }) }}">Edit</a>
+            <a href="{{ path('task_edit', { 'id': task.id }) }}">Edit Task</a>
         </li>
         <li>
             {{ form_start(delete_form) }}
-                <input type="submit" value="Delete">
+                <input type="submit" value="Delete Task">
             {{ form_end(delete_form) }}
         </li>
     </ul>
