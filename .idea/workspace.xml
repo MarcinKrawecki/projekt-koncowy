@@ -1,25 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="548f8a95-56d6-44cd-ae9d-1000ed036194" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/task_planner/app/Resources/views/category/edit.html.twig" afterPath="$PROJECT_DIR$/task_planner/app/Resources/views/category/edit.html.twig" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/task_planner/app/Resources/views/category/new.html.twig" afterPath="$PROJECT_DIR$/task_planner/app/Resources/views/category/new.html.twig" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/task_planner/app/Resources/views/category/show.html.twig" afterPath="$PROJECT_DIR$/task_planner/app/Resources/views/category/show.html.twig" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/task_planner/app/Resources/views/comment/edit.html.twig" afterPath="$PROJECT_DIR$/task_planner/app/Resources/views/comment/edit.html.twig" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/task_planner/app/Resources/views/comment/index.html.twig" afterPath="$PROJECT_DIR$/task_planner/app/Resources/views/comment/index.html.twig" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/task_planner/app/Resources/views/comment/new.html.twig" afterPath="$PROJECT_DIR$/task_planner/app/Resources/views/comment/new.html.twig" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/task_planner/app/Resources/views/comment/show.html.twig" afterPath="$PROJECT_DIR$/task_planner/app/Resources/views/comment/show.html.twig" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/task_planner/app/Resources/views/task/edit.html.twig" afterPath="$PROJECT_DIR$/task_planner/app/Resources/views/task/edit.html.twig" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/task_planner/app/Resources/views/task/index.html.twig" afterPath="$PROJECT_DIR$/task_planner/app/Resources/views/task/index.html.twig" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/task_planner/app/Resources/views/task/new.html.twig" afterPath="$PROJECT_DIR$/task_planner/app/Resources/views/task/new.html.twig" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/task_planner/app/Resources/views/task/show.html.twig" afterPath="$PROJECT_DIR$/task_planner/app/Resources/views/task/show.html.twig" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/task_planner/src/TaskPlannerBundle/Controller/TaskController.php" afterPath="$PROJECT_DIR$/task_planner/src/TaskPlannerBundle/Controller/TaskController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/task_planner/src/TaskPlannerBundle/Entity/Category.php" afterPath="$PROJECT_DIR$/task_planner/src/TaskPlannerBundle/Entity/Category.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/task_planner/src/TaskPlannerBundle/Entity/Comment.php" afterPath="$PROJECT_DIR$/task_planner/src/TaskPlannerBundle/Entity/Comment.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/task_planner/src/TaskPlannerBundle/Entity/Task.php" afterPath="$PROJECT_DIR$/task_planner/src/TaskPlannerBundle/Entity/Task.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/task_planner/src/TaskPlannerBundle/Form/TaskType.php" afterPath="$PROJECT_DIR$/task_planner/src/TaskPlannerBundle/Form/TaskType.php" />
-    </list>
+    <list default="true" id="548f8a95-56d6-44cd-ae9d-1000ed036194" name="Default" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -772,12 +754,12 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1482315533465</updated>
-      <workItem from="1482315535499" duration="36802000" />
+      <workItem from="1482315535499" duration="37283000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="36802000" />
+    <option name="totallyTimeSpent" value="37283000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="65" y="24" width="1535" height="876" extended-state="6" />

@@ -5,26 +5,26 @@
 
     <table>
         <thead>
-            <tr>
-                <th>Id</th>
-                <th>User</th>
-                <th>Name</th>
-                <th>Description</th>
-                <th>Category</th>
-                <th>Done</th>
-                <th>Duedate</th>
-                <th>Actions</th>
-            </tr>
+        <tr>
+            <th>Id</th>
+            <th>User</th>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Category</th>
+            <th>Done</th>
+            <th>Duedate</th>
+            <th>Actions</th>
+        </tr>
         </thead>
         <tbody>
 
         {% for task in tasks %}
-                   <tr>
+            <tr>
                 <td><a href="{{ path('task_show', { 'id': task.id }) }}">{{ task.id }}</a></td>
-                <td>{{ task.user}}</td>
+                <td><a href="{{ path('task_show', {'id': task.id}) }}">{{ task.user }}</a></td>
                 <td>{{ task.name }}</td>
                 <td>{{ task.description }}</td>
-                <td>{{ task.category }}</td>
+                <td><a href="{{ path('task_show', {'id': task.id}) }}">{{ task.category }}</a></td>
                 <td>{% if task.done %}Yes{% else %}No{% endif %}</td>
                 <td>{% if task.dueDate %}{{ task.dueDate|date('Y-m-d') }}{% endif %}</td>
                 <td>
@@ -33,7 +33,12 @@
                             <a href="{{ path('task_show', { 'id': task.id }) }}">show Task</a>
                         </li>
                         <li>
-                            <a href="{{ path('task_edit', { 'id': task.id }) }}">edit Task</a>
+                            {% if task.done %}
+                                <a>edit Task</a>
+                            {% else %}
+                                <a href="{{ path('task_edit', { 'id': task.id }) }}">edit Task</a>
+                            {% endif %}
+
                         </li>
                     </ul>
                 </td>
@@ -49,3 +54,5 @@
 
     </ul>
 {% endblock %}
+
+

@@ -9,6 +9,8 @@
                 <th>Id</th>
                 <th>Comment</th>
                 <th>Actions</th>
+                <th>Name</th>
+                <td>{{ task.name }}</td>
             </tr>
         </thead>
         <tbody>
@@ -16,7 +18,8 @@
             <tr>
                 <td><a href="{{ path('comment_show', { 'id': comment.id }) }}">{{ comment.id }}</a></td>
                 <td>{{ comment.comment }}</td>
-                <td>
+                <td><a href="{{ path('comment_show', {'id': comment.id}) }}">{{  task.id }}</a></td>
+                <td>{{ task.name }}</td>
                     <ul>
                         <li>
                             <a href="{{ path('comment_show', { 'id': comment.id }) }}">show Comment</a>
