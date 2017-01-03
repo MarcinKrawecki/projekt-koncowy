@@ -258,4 +258,5 @@ class Task
     public function __toString() {
         return $this->name;
     }
+
 }

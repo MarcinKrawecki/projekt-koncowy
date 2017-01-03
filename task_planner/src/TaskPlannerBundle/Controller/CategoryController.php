@@ -24,8 +24,7 @@ class CategoryController extends Controller
     public function indexAction()
     {
         $em = $this->getDoctrine()->getManager();
-
-        $categories = $em->getRepository('TaskPlannerBundle:Category')->findAll();
+        $categories = $em->getRepository('TaskPlannerBundle:Category')->findByUser($this->getUser());
 
         return $this->render('category/index.html.twig', array(
             'categories' => $categories,
@@ -46,6 +45,7 @@ class CategoryController extends Controller
 
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
+            $category->setUser($this->getUser());
             $em->persist($category);
             $em->flush($category);
 

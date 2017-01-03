@@ -30,6 +30,11 @@
                 <td>
                     <ul>
                         <li>
+                            <a href="{{ path('comment_new', { 'task_id': task.id }) }}">add Comment</a>
+                        </li>
+
+
+                        <li>
                             <a href="{{ path('task_show', { 'id': task.id }) }}">show Task</a>
                         </li>
                         <li>

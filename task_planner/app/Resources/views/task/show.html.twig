@@ -34,11 +34,30 @@
             <th>user</th>
             <td>{{ task.user }}</td>
         </tr>
+        <tr>
 
+        </tr>
+
+
+    {% for comment in task.comment %}
+        <tr>
+        <th>komentarz index</th>
+        <td><a href="{{ path('comment_index', { 'id': comment.id }) }}">{{comment.id}}</a></td>
+       </tr>
+<tr>
+        <th>komentarz</th>
+        <td>{{ comment.comment }}</td>
+        </tr>
+
+    {% endfor %}
+        <th>ilosc komentarzy</th>
+        <td>{{ task.comment.count }}</td>
         </tbody>
     </table>
-
     <ul>
+        <li>
+            <a href="{{ path('comment_index') }}">Back to Comment list</a>
+        </li>
         <li>
             <a href="{{ path('category_index') }}">Back to the Category list</a>
         </li>

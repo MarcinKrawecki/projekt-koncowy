@@ -24,11 +24,11 @@ class TaskController extends Controller
     public function indexAction()
     {
         $em = $this->getDoctrine()->getManager();
-
-        $tasks = $em->getRepository('TaskPlannerBundle:Task')->findAll();
+        $loggedUser = $this->getUser();// tworzy obiekt zalogowanego User'a
+        $tasks = $em->getRepository('TaskPlannerBundle:Task')->findByUser($loggedUser);// wybiera task'i na zalogowanym user'ze
 
         return $this->render('task/index.html.twig', array(
-            'tasks' => $tasks,
+            'tasks' => $tasks
         ));
     }
 

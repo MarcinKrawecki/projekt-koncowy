@@ -7,6 +7,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Request;
+use TaskPlannerBundle\Entity\Task;
 
 /**
  * Comment controller.
@@ -26,19 +27,22 @@ class CommentController extends Controller
         $em = $this->getDoctrine()->getManager();
 
         $comments = $em->getRepository('TaskPlannerBundle:Comment')->findAll();
-
+        //$tasks = $em->getRepository('TaskPlannerBundle:Comment')->findAll();
         return $this->render('comment/index.html.twig', array(
-            'comments' => $comments,
+            'comments' => $comments
         ));
     }
 
     /**
      * Creates a new comment entity.
      *
-     * @Route("/new", name="comment_new")
+     * @Route("/new/{task_id}", name="comment_new")
      * @Method({"GET", "POST"})
+     * @param Request $request
+     * @param Task $task
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
-    public function newAction(Request $request)
+    public function newAction(Request $request, $task_id)
     {
         $comment = new Comment();
         $form = $this->createForm('TaskPlannerBundle\Form\CommentType', $comment);
@@ -46,6 +50,7 @@ class CommentController extends Controller
 
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
+            $comment->setTask($em->getRepository("TaskPlannerBundle:Task")->find($task_id));
             $em->persist($comment);
             $em->flush($comment);
 
