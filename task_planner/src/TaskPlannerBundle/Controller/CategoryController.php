@@ -82,13 +82,18 @@ class CategoryController extends Controller
      */
     public function editAction(Request $request, Category $category)
     {
+
         $deleteForm = $this->createDeleteForm($category);
-        $editForm = $this->createForm('TaskPlannerBundle\Form\CategoryType', $category);
+
+
+        $editForm = $this->createFormBuilder($category)
+            ->add('name','text')
+            ->getForm();
+
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $this->getDoctrine()->getManager()->flush();
-
             return $this->redirectToRoute('category_edit', array('id' => $category->getId()));
         }
 

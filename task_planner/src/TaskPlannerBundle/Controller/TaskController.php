@@ -5,8 +5,7 @@ namespace TaskPlannerBundle\Controller;
 use TaskPlannerBundle\Entity\Task;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Symfony\Component\HttpFoundation\Request;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;use Symfony\Component\HttpFoundation\Request;
 
 /**
  * Task controller.
@@ -24,11 +23,28 @@ class TaskController extends Controller
     public function indexAction()
     {
         $em = $this->getDoctrine()->getManager();
-        $loggedUser = $this->getUser();// tworzy obiekt zalogowanego User'a
-        $tasks = $em->getRepository('TaskPlannerBundle:Task')->findByUser($loggedUser);// wybiera task'i na zalogowanym user'ze
+
+        $loggedUser = $this->getUser();
+
+        $tasks = $em->getRepository('TaskPlannerBundle:Task')->findByUser($loggedUser);
+        //metoda 'dynamiczna' przyjmuje obiekt zalogowanego usera
+
+        $tasksUnfinished = $em->getRepository('TaskPlannerBundle:Task')->findByDone(false);
+        //metoda 'dynamiczna' pobierająca obiekty z niezakończonym taskiem
+
+        $tasksUnf = 0;    //zmienna pomocnicza - licznik niezakończonych tasków
+
+
+        foreach($tasksUnfinished as $tc){
+            if($tc->getUser() == $loggedUser){
+                //dump($tc);
+                $tasksUnf++;
+            }
+        }
+
 
         return $this->render('task/index.html.twig', array(
-            'tasks' => $tasks
+            'tasks' => $tasks, 'user'=>$loggedUser, 'tasksUnfinished'=>$tasksUnf//, 'comment' => $comments
         ));
     }
 
@@ -57,6 +73,7 @@ class TaskController extends Controller
             'task' => $task,
             'form' => $form->createView(),
         ));
+
     }
 
     /**
@@ -133,6 +150,8 @@ class TaskController extends Controller
             ->setAction($this->generateUrl('task_delete', array('id' => $task->getId())))
             ->setMethod('DELETE')
             ->getForm()
-        ;
+            ;
     }
+
+
 }
