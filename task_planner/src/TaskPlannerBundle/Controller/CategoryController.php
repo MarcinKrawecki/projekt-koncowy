@@ -40,23 +40,34 @@ class CategoryController extends Controller
     public function newAction(Request $request)
     {
         $category = new Category();
-        $form = $this->createForm('TaskPlannerBundle\Form\CategoryType', $category);
+
+        $form = $this->createFormBuilder($category)
+            ->add('name','text')
+            ->add('save', 'submit', array('label' => 'Create Category'))
+            ->getForm();
+
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
+
             $category->setUser($this->getUser());
+            //ustawiam aktualnie zalogowanego użytkownika jako tego który stworzył komentarz,
+            // analogicznie do zrobienia w pozostałych formularzach
+
+            $em = $this->getDoctrine()->getManager();
             $em->persist($category);
             $em->flush($category);
 
             return $this->redirectToRoute('category_show', array('id' => $category->getId()));
         }
 
+
         return $this->render('category/new.html.twig', array(
             'category' => $category,
             'form' => $form->createView(),
         ));
     }
+
 
     /**
      * Finds and displays a category entity.
