@@ -5,7 +5,9 @@ namespace TaskPlannerBundle\Controller;
 use TaskPlannerBundle\Entity\Task;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;use Symfony\Component\HttpFoundation\Request;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 /**
  * Task controller.
@@ -14,6 +16,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;use Symfony\Component
  */
 class TaskController extends Controller
 {
+
     /**
      * Lists all task entities.
      *
@@ -25,23 +28,15 @@ class TaskController extends Controller
         $em = $this->getDoctrine()->getManager();
 
         $loggedUser = $this->getUser();
+        $tasks = $em->getRepository('TaskPlannerBundle:Task')->findByUser($loggedUser); // taski  zalogowanego usera
 
-        $tasks = $em->getRepository('TaskPlannerBundle:Task')->findByUser($loggedUser);
-        //metoda 'dynamiczna' przyjmuje obiekt zalogowanego usera
-
-        $tasksUnfinished = $em->getRepository('TaskPlannerBundle:Task')->findByDone(false);
-        //metoda 'dynamiczna' pobierająca obiekty z niezakończonym taskiem
-
+        $tasksUnfinished = $em->getRepository('TaskPlannerBundle:Task')->findByDone(false); // pobieranie obiektow z niezakończonym taskiem
         $tasksUnf = 0;    //zmienna pomocnicza - licznik niezakończonych tasków
-
-
         foreach($tasksUnfinished as $tc){
             if($tc->getUser() == $loggedUser){
-                //dump($tc);
                 $tasksUnf++;
             }
         }
-
 
         return $this->render('task/index.html.twig', array(
             'tasks' => $tasks, 'user'=>$loggedUser, 'tasksUnfinished'=>$tasksUnf//, 'comment' => $comments
@@ -57,8 +52,30 @@ class TaskController extends Controller
     public function newAction(Request $request)
     {
         $task = new Task();
-        $form = $this->createForm('TaskPlannerBundle\Form\TaskType', $task);
+
+        $em = $this->getDoctrine()->getManager();
+        $loggedUser = $this->getUser();
+        $tasks = $em->getRepository('TaskPlannerBundle:Category')->findByUser($loggedUser);
+
+
+        $form = $this->createFormBuilder($task)
+            ->add('name','text')
+            ->add('description','text')
+            ->add('done')
+            ->add('dueDate')
+            ->add('category', 'entity', array(
+                'class'=>'TaskPlannerBundle:Category',
+                'choices' => $tasks,
+            ))
+
+            ->getForm();
+
         $form->handleRequest($request);
+        /*
+                $form = $this->createForm('TaskPlannerBundle\Form\TaskType', $task);
+                $form->handleRequest($request);
+        */
+
 
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
@@ -100,8 +117,24 @@ class TaskController extends Controller
      */
     public function editAction(Request $request, Task $task)
     {
+        $em = $this->getDoctrine()->getManager();
+        $loggedUser = $this->getUser();
+        $tasks = $em->getRepository('TaskPlannerBundle:Category')->findByUser($loggedUser);
+
         $deleteForm = $this->createDeleteForm($task);
-        $editForm = $this->createForm('TaskPlannerBundle\Form\TaskType', $task);
+
+        $editForm = $this->createFormBuilder($task)
+            ->add('name','text')
+            ->add('description','text')
+            ->add('done')
+            ->add('dueDate')
+            ->add('category', 'entity', array(
+                'class'=>'TaskPlannerBundle:Category',
+                'choices' => $tasks,
+            ))
+
+            ->getForm();
+
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
@@ -152,6 +185,4 @@ class TaskController extends Controller
             ->getForm()
             ;
     }
-
-
 }

@@ -5,8 +5,7 @@ namespace TaskPlannerBundle\Controller;
 use TaskPlannerBundle\Entity\Category;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Symfony\Component\HttpFoundation\Request;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;use Symfony\Component\HttpFoundation\Request;
 
 /**
  * Category controller.
@@ -24,7 +23,9 @@ class CategoryController extends Controller
     public function indexAction()
     {
         $em = $this->getDoctrine()->getManager();
-        $categories = $em->getRepository('TaskPlannerBundle:Category')->findByUser($this->getUser());
+
+        $loggedUser = $this->getUser();     //zmienna zalogowanego usera
+        $categories = $em->getRepository('TaskPlannerBundle:Category')->findByUser($loggedUser);
 
         return $this->render('category/index.html.twig', array(
             'categories' => $categories,
@@ -50,9 +51,7 @@ class CategoryController extends Controller
 
         if ($form->isSubmitted() && $form->isValid()) {
 
-            $category->setUser($this->getUser());
-            //ustawiam aktualnie zalogowanego użytkownika jako tego który stworzył komentarz,
-            // analogicznie do zrobienia w pozostałych formularzach
+            $category->setUser($this->getUser());//ustawia aktualnie zalogowanego użytkownika jako tworzacego kategorie
 
             $em = $this->getDoctrine()->getManager();
             $em->persist($category);
@@ -67,7 +66,6 @@ class CategoryController extends Controller
             'form' => $form->createView(),
         ));
     }
-
 
     /**
      * Finds and displays a category entity.
@@ -148,6 +146,6 @@ class CategoryController extends Controller
             ->setAction($this->generateUrl('category_delete', array('id' => $category->getId())))
             ->setMethod('DELETE')
             ->getForm()
-        ;
+            ;
     }
 }

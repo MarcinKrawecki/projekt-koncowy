@@ -8,6 +8,8 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Request;
 use TaskPlannerBundle\Entity\Task;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+
 
 /**
  * Comment controller.
@@ -25,32 +27,45 @@ class CommentController extends Controller
     public function indexAction()
     {
         $em = $this->getDoctrine()->getManager();
+        $loggedUser = $this->getUser();
+        $tasks = $em->getRepository('TaskPlannerBundle:Task')->findByUser($loggedUser);//zalogowany user
 
-        $comments = $em->getRepository('TaskPlannerBundle:Comment')->findAll();
-        //$tasks = $em->getRepository('TaskPlannerBundle:Comment')->findAll();
+        $comments = $em->getRepository('TaskPlannerBundle:Comment')->findByTask($tasks); //komentarze dla task'a
+
         return $this->render('comment/index.html.twig', array(
-            'comments' => $comments
+            'comments' => $comments,
         ));
     }
 
     /**
      * Creates a new comment entity.
      *
-     * @Route("/new/{task_id}", name="comment_new")
+     * @Route("/new", name="comment_new")
      * @Method({"GET", "POST"})
-     * @param Request $request
-     * @param Task $task
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
-    public function newAction(Request $request, $task_id)
+    public function newAction(Request $request)
     {
+        $em = $this->getDoctrine()->getManager();
+
         $comment = new Comment();
-        $form = $this->createForm('TaskPlannerBundle\Form\CommentType', $comment);
+        $loggedUser = $this->getUser();
+        $tasks = $em->getRepository('TaskPlannerBundle:Task')->findByUser($loggedUser);
+
+        $form = $this->createFormBuilder($comment)
+            ->add('comment','text')
+            ->add('task', 'entity', array(
+                'class'=>'TaskPlannerBundle:Task',
+                'choices' => $tasks,
+            ))
+
+            ->getForm();
+
         $form->handleRequest($request);
 
+        //dump($comment);
         if ($form->isSubmitted() && $form->isValid()) {
+
             $em = $this->getDoctrine()->getManager();
-            $comment->setTask($em->getRepository("TaskPlannerBundle:Task")->find($task_id));
             $em->persist($comment);
             $em->flush($comment);
 
@@ -137,6 +152,6 @@ class CommentController extends Controller
             ->setAction($this->generateUrl('comment_delete', array('id' => $comment->getId())))
             ->setMethod('DELETE')
             ->getForm()
-        ;
+            ;
     }
 }

@@ -1,0 +1,29 @@
+﻿Task Planner – projekt koncowy.
+
+Zalozenia:
+
+Zaimplementuj aplikację przeznaczoną do prostego planowania zadań.
+
+Każdy z zarejestrowanych użytkowników może zdefiniować kategorie tematyczne, a następnie przypisywać do nich zadania.
+
+Każde z zadań może być opisane przez nazwę, opis, termin realizacji, priorytet itp. 
+
+Użytkownicy powinni mieć możliwość dowolnego edytowania swoich planów, oznaczania zadań jako wykonanych, a także rejestrowania postępu realizacji w postaci komentarzy.
+
+
+Zainstaluj i skonfiguruj FOSUserBundle.
+
+Daj użytkownikom następujące możliwości rejestrację, logowanie.
+
+Zaimplementuj następujące funkcjonalności:
+edycji kategorii tematycznych,
+edycji zadań,
+wyświetlenia listy zadań użytkownika z rozróżnieniem na zadania aktualnie i już wykonane.
+
+Zaimplementuj funkcjonalność dodawania komentarzy. 
+
+Zaimplementuj funkcjonalność wyświetlenia liczby komentarzy przy każdym z zadań na liście.
+
+Zaimplementuj komendę konsolową wysyłającą użytkownikom powiadomienia o zaległych zadaniach do realizacji.
+
+Zaimplementuj funkcjonalność uniemożliwiającą edycję zakończonych zadań.

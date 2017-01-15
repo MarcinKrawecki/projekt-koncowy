@@ -6,13 +6,12 @@
     <table>
         <thead>
         <tr>
-            <th>Id</th>
-            <th>User</th>
             <th>Name</th>
             <th>Description</th>
             <th>Category</th>
             <th>Done</th>
             <th>Duedate</th>
+            <th>Number of Commnets</th>
             <th>Actions</th>
         </tr>
         </thead>
@@ -20,13 +19,12 @@
 
         {% for task in tasks %}
             <tr>
-                <td><a href="{{ path('task_show', { 'id': task.id }) }}">{{ task.id }}</a></td>
-                <td><a href="{{ path('task_show', {'id': task.id}) }}">{{ task.user }}</a></td>
                 <td>{{ task.name }}</td>
                 <td>{{ task.description }}</td>
-                <td><a href="{{ path('task_show', {'id': task.id}) }}">{{ task.category }}</a></td>
+                <td>{{ task.category }}</td>
                 <td>{% if task.done %}Yes{% else %}No{% endif %}</td>
                 <td>{% if task.dueDate %}{{ task.dueDate|date('Y-m-d') }}{% endif %}</td>
+                <td><a href="{{ path('task_show', {'id': task.id}) }}">{{ task.comment.count }}</a></td>
                 <td>
                     <ul>
                         <li>
@@ -59,6 +57,5 @@
 
     </ul>
 {% endblock %}
-
 
 
